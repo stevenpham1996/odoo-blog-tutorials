@@ -1,6 +1,6 @@
-[submodule "product_purchase_sale"]
-	path = product_purchase_sale
-	url = https://github.com/stevenpham1996/blog-tutorials-product_purchase_sale
 [submodule "cat_cattery"]
 	path = cat_cattery
-	url = https://github.com/stevenpham1996/blog-tutorials-cat_cattery
+	url = https://github.com/stevenpham1996/blog-tutorials-cat_cattery.git
+[submodule "product_purchase_sale"]
+	path = product_purchase_sale
+	url = https://github.com/stevenpham1996/blog-tutorials-product_purchase_sale.git
