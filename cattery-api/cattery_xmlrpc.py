@@ -22,7 +22,6 @@ class CatteryClient():
         return self._execute('search_read', [domain, fields])
     
     def create(self, breed):
-        if breed == None: raise ValueError("Please enter the kitten's breed")
         breed_id = self.search_read(breed)[0]['breed_id'][0]
         entries = {'breed_id': breed_id}
         num_entries = int(input("How many entries does the record have? "))
@@ -33,7 +32,6 @@ class CatteryClient():
         return self._execute('create', [entries])
     
     def write(self, kitten_id, breed):
-        if breed == None: raise ValueError("Please enter the kitten's breed")
         breed_id = self.search_read(breed)[0]['breed_id'][0]
         entries = {'breed_id': breed_id}
         num_entries = int(input("How many entries to update? "))
