@@ -1,25 +1,22 @@
-from xmlrpc import client
+import odoorpc
 
 class CatteryAPI():
     
     def __init__(self, host, port, db, user, password, model:str):
-        common = client.ServerProxy(f'http://{host}:{port}/xmlrpc/2/common')
-        self.api = client.ServerProxy(f'http://{host}:{port}/xmlrpc/2/object')
-        self.uid = common.authenticate(db, user, password, {})
-        self.db = db
-        self.password = password
-        self.model = model
+        self.api = odoorpc.ODOO(host, protocol='jsonrpc', port=port)
+        self.api.login(db, user, password)
+        self.uid = self.api.env.uid
+        self._model = model
+        self.model = self.api.env[self._model]
 
     def _execute(self, method:str, arg_list, kwarg_dict=None):
         return self.api.execute_kw(
-            self.db, self.uid, self.password, self.model,
-            method, arg_list, kwarg_dict or {}
-            )
-    
+            self._model, method, arg_list, kwarg_dict or {})
+        
     def search_read(self, breed=None):
         domain = [('breed_id', 'ilike', breed)] if breed else []
         fields = ['name', 'gender', 'age', 'breed_id']
-        return self._execute('search_read', [domain, fields])
+        return self.model.search_read(domain, fields)
     
     def create(self, breed):
         breed_id = self.search_read(breed)[0]['breed_id'][0]
@@ -29,7 +26,7 @@ class CatteryAPI():
             field = input(f"Enter field {i+1}: ").lower()
             value = input(f"Enter value for field '{field}': ")
             entries[field] = value
-        return self._execute('create', [entries])
+        return self.model.create(entries)
     
     def write(self, kitten_id, breed):
         breed_id = self.search_read(breed)[0]['breed_id'][0]
@@ -39,20 +36,20 @@ class CatteryAPI():
             field = input(f"Enter field {i+1}: ").lower()
             value = input(f"Enter value for field '{field}': ")
             entries[field] = value
-        return self._execute('write', [kitten_id, entries])
-        
+        return self.model.write(kitten_id, entries)
     
     def unlink(self, kitten_id):
-        return self._execute('unlink', [kitten_id])
-   
+        return self.model.unlink(kitten_id)
     
 if __name__ == "__main__":
-    # Sample test
+# Sample test
     host, port, db = "localhost", 8069, "blog_tutorials"
     user, pwd = "admin", "admin"
     model = "cat_cattery.kitten"
     api = CatteryAPI(host, port, db, user, pwd, model)
     from pprint import pprint
-    pprint(api.search_read("Maine Coon"))
+    pprint(api._execute("search", [[("name", "=", "Zara")]]))
     print()
-    pprint(api.create("Bengal"))
+    pprint(api._execute("read", [1, ["name", "age", "gender", "breed_id"]]))
+    print()
+    pprint(api.search_read("Bengal"))

@@ -1,37 +1,45 @@
 from argparse import ArgumentParser
-from cattery_xmlrpc import CatteryClient
-from pprint import pprint
+from cattery_xmlrpc import CatteryAPI as CatteryXMLRPC
+from cattery_jsonrpc import CatteryAPI as CatteryJSONRPC
+
 
 parser = ArgumentParser(
     description="Cattery XML-RPC client for Kitten Catalog. ",
     prog="kitten_catalog.py",
 )
+
 # define operation commands
 parser.add_argument(
     "command",
     choices=["show","create","update","delete"],
 )
+
 # define data arguments
 parser.add_argument("params", nargs="*")
 args = parser.parse_args()
 
-url, db = "localhost:8069", "blog_tutorials"
+host, port, db = "localhost", 8069, "blog_tutorials"
 user, pwd = "admin", "admin"
-api = CatteryClient(url, db, user, pwd)
+model="cat_cattery.kitten"
+
+user_api = input("Enter API protocol - jsonrpc or xmlrpc: ").lower()
+if user_api == "jsonrpc":
+    api = CatteryJSONRPC(host, port, db, user, pwd, model)
+else:
+    api = CatteryXMLRPC(host, port, db, user, pwd, model)
 
 if args.command == "show":
     breed = args.params[0] if args.params else None
     kittens = api.search_read(breed)
     for kitten in kittens:
-        pprint(f"{kitten['name']}, {kitten['age']}, {kitten['gender']}, {kitten['breed_id'][1]}")
+        print(f"{kitten['name']}, {kitten['age']}, {kitten['gender']}, {kitten['breed_id'][1]}")
 
 if args.command == "create":
     if len(args.params) != 1:
         raise Exception("Please enter the kitten's breed")
     breed = args.params[0]
     kitten_id = api.create(breed)
-    for kitten in kittens:
-        pprint(f"Kitten - ID: {kitten_id} has been listed")
+    print(f"Kitten - ID: {kitten_id} has been listed")
 
 if args.command == "update":
     if len(args.params) != 2:
@@ -39,11 +47,11 @@ if args.command == "update":
     kitten_id = args.params[0]
     breed = args.params[1]
     api.write(kitten_id, breed)
-    pprint(f"Kitten - ID: {kitten_id} has been updated")
+    print(f"Kitten - ID: {kitten_id} has been updated")
 
 if args.command == "delete":
-    if len(args.params) != 2:
+    if len(args.params) != 1:
         raise Exception("Please enter the kitten's ID")
     kitten_id = args.params[0]
     api.unlink(kitten_id)
-    pprint(f"Kitten - ID: {kitten_id} has been deleted")
+    print(f"Kitten - ID: {kitten_id} has been deleted")
