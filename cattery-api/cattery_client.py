@@ -2,6 +2,10 @@ from argparse import ArgumentParser
 from cattery_xmlrpc import CatteryAPI as CatteryXMLRPC
 from cattery_jsonrpc import CatteryAPI as CatteryJSONRPC
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 parser = ArgumentParser(
     description="Cattery XML-RPC client for Kitten Catalog. ",
@@ -13,14 +17,17 @@ parser.add_argument(
     "command",
     choices=["show","create","update","delete"],
 )
-
-# define data arguments
+# define entry arguments
 parser.add_argument("params", nargs="*")
+
 args = parser.parse_args()
 
-host, port, db = "localhost", 8069, "blog_tutorials"
-user, pwd = "admin", "admin"
-model="cat_cattery.kitten"
+host = os.getenv("HOST")
+port = os.getenv("PORT")
+db = os.getenv("DB")
+user = os.getenv("USER")
+pwd = os.getenv("PWD")
+model=input("Enter the model reference: ")
 
 user_api = input("Enter API protocol - jsonrpc or xmlrpc: ").lower()
 if user_api == "jsonrpc":

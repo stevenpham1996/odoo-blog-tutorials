@@ -50,6 +50,6 @@ if __name__ == "__main__":
     from pprint import pprint
     pprint(api._execute("search", [[("name", "=", "Zara")]]))
     print()
-    pprint(api._execute("read", [1, ["name", "age", "gender", "breed_id"]]))
+    pprint(api._execute("read", [3, ["name", "age", "gender", "breed_id"]]))
     print()
     pprint(api.search_read("Bengal"))

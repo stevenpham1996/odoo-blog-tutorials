@@ -53,6 +53,6 @@ if __name__ == "__main__":
     model = "cat_cattery.kitten"
     api = CatteryAPI(host, port, db, user, pwd, model)
     from pprint import pprint
-    pprint(api.search_read("Maine Coon"))
+    pprint(api.search_read("Bengal"))
     print()
-    pprint(api.create("Bengal"))
+    pprint(api.create("Maine Coon"))
