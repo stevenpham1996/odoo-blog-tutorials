@@ -48,9 +48,17 @@ class CatteryAPI():
     
 if __name__ == "__main__":
     # Sample test
-    host, port, db = "localhost", 8069, "blog_tutorials"
-    user, pwd = "admin", "admin"
-    model = "cat_cattery.kitten"
+    from dotenv import load_dotenv
+    import os
+    load_dotenv()
+    
+    host = os.getenv("HOST")
+    port = os.getenv("PORT")
+    db = os.getenv("DB")
+    user = os.getenv("USER")
+    pwd = os.getenv("PWD")
+    model=input("Enter the model reference: ")
+    
     api = CatteryAPI(host, port, db, user, pwd, model)
     from pprint import pprint
     pprint(api.search_read("Bengal"))
