@@ -52,9 +52,10 @@ if __name__ == "__main__":
     db = os.getenv("DB")
     user = os.getenv("USER")
     pwd = os.getenv("PWD")
-    model=input("Enter the model reference: ")
+    model=input("Please enter <module>.<model>: ")
     
     api = CatteryAPI(host, port, db, user, pwd, model)
+    
     from pprint import pprint
     pprint(api._execute("search", [[("name", "=", "Zara")]]))
     print()

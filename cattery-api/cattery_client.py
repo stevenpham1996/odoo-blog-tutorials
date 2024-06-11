@@ -27,9 +27,15 @@ port = os.getenv("PORT")
 db = os.getenv("DB")
 user = os.getenv("USER")
 pwd = os.getenv("PWD")
-model=input("Enter the model reference: ")
+model=input("Please enter <module>.<model>: ")
 
 user_api = input("Enter API protocol - jsonrpc or xmlrpc: ").lower()
+while True: 
+    user_api = input("Enter API protocol - 'jsonrpc' or 'xmlrpc': ").lower() 
+    if user_api in ["jsonrpc", "xmlrpc"]: 
+        break 
+    else: 
+        print("Invalid input. Please try again.")
 if user_api == "jsonrpc":
     api = CatteryJSONRPC(host, port, db, user, pwd, model)
 else:
