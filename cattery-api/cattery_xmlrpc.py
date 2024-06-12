@@ -57,7 +57,7 @@ if __name__ == "__main__":
     db = os.getenv("DB")
     user = os.getenv("USER")
     pwd = os.getenv("PWD")
-    model=input("Please enter <module>.<model>: ")
+    model=input("Please enter the model reference <module>.<model>: ")
     
     api = CatteryAPI(host, port, db, user, pwd, model)
     

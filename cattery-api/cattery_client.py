@@ -8,8 +8,8 @@ import os
 load_dotenv()
 
 parser = ArgumentParser(
-    description="Cattery XML-RPC client for Kitten Catalog. ",
-    prog="kitten_catalog.py",
+    description="Cattery API client.",
+    prog="kitten_client.py",
 )
 
 # define operation commands
@@ -27,15 +27,14 @@ port = os.getenv("PORT")
 db = os.getenv("DB")
 user = os.getenv("USER")
 pwd = os.getenv("PWD")
-model=input("Please enter <module>.<model>: ")
+model=input("Please enter the model reference <module>.<model>: ")
 
-user_api = input("Enter API protocol - jsonrpc or xmlrpc: ").lower()
 while True: 
     user_api = input("Enter API protocol - 'jsonrpc' or 'xmlrpc': ").lower() 
     if user_api in ["jsonrpc", "xmlrpc"]: 
         break 
     else: 
-        print("Invalid input. Please try again.")
+        print("Invalid input. Make sure no typos and try again.")
 if user_api == "jsonrpc":
     api = CatteryJSONRPC(host, port, db, user, pwd, model)
 else:
