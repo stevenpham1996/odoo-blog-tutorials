@@ -48,15 +48,15 @@ class CatteryAPI():
     
 if __name__ == "__main__":
     # Sample test
-    from dotenv import load_dotenv
-    import os
-    load_dotenv()
+    from encription import load_credentials
+
+    credentials = load_credentials()
+    host = credentials['HOST']
+    port = credentials['PORT']
+    db = credentials['DB']
+    user = credentials['USER']
+    pwd = credentials['PWD']
     
-    host = os.getenv("HOST")
-    port = os.getenv("PORT")
-    db = os.getenv("DB")
-    user = os.getenv("USER")
-    pwd = os.getenv("PWD")
     model=input("Please enter the model reference <module>.<model>: ")
     
     api = CatteryAPI(host, port, db, user, pwd, model)

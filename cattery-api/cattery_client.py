@@ -1,11 +1,8 @@
 from argparse import ArgumentParser
 from cattery_xmlrpc import CatteryAPI as CatteryXMLRPC
 from cattery_jsonrpc import CatteryAPI as CatteryJSONRPC
+from encription import load_credentials
 
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
 
 parser = ArgumentParser(
     description="Cattery API client.",
@@ -22,12 +19,15 @@ parser.add_argument("params", nargs="*")
 
 args = parser.parse_args()
 
-host = os.getenv("HOST")
-port = os.getenv("PORT")
-db = os.getenv("DB")
-user = os.getenv("USER")
-pwd = os.getenv("PWD")
-model=input("Please enter the model reference <module>.<model>: ")
+# Load and decrypt the server details
+credentials = load_credentials()
+host = credentials['HOST']
+port = credentials['PORT']
+db = credentials['DB']
+user = credentials['USER']
+pwd = credentials['PWD']
+
+model = input("Please enter the model reference <module>.<model>: ")
 
 while True: 
     user_api = input("Enter API protocol - 'jsonrpc' or 'xmlrpc': ").lower() 
