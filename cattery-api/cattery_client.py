@@ -1,8 +1,7 @@
 from argparse import ArgumentParser
 from cattery_xmlrpc import CatteryAPI as CatteryXMLRPC
 from cattery_jsonrpc import CatteryAPI as CatteryJSONRPC
-from encription import load_credentials
-
+from cryptography.fernet import Fernet
 
 parser = ArgumentParser(
     description="Cattery API client.",
@@ -18,6 +17,18 @@ parser.add_argument(
 parser.add_argument("params", nargs="*")
 
 args = parser.parse_args()
+
+# Function to load and decrypt the environment variables
+def load_credentials():
+    with open('secret.key', 'rb') as key_file:
+        key = key_file.read()
+    fernet = Fernet(key)
+
+    with open('credentials.enc', 'rb') as encrypted_file:
+        encrypted = encrypted_file.read()
+    decrypted = fernet.decrypt(encrypted).decode().split('\n')
+
+    return dict(line.split('=') for line in decrypted if line)
 
 # Load and decrypt the server details
 credentials = load_credentials()

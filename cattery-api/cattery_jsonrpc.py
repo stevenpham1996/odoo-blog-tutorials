@@ -41,24 +41,4 @@ class CatteryAPI():
     def unlink(self, kitten_id):
         return self.model.unlink(kitten_id)
     
-if __name__ == "__main__":
-    # Sample test
-    from encription import load_credentials
 
-    credentials = load_credentials()
-    host = credentials['HOST']
-    port = credentials['PORT']
-    db = credentials['DB']
-    user = credentials['USER']
-    pwd = credentials['PWD']
-    
-    model=input("Please enter the model reference <module>.<model>: ")
-    
-    api = CatteryAPI(host, port, db, user, pwd, model)
-    
-    from pprint import pprint
-    pprint(api._execute("search", [[("name", "=", "Zara")]]))
-    print()
-    pprint(api._execute("read", [3, ["name", "age", "gender", "breed_id"]]))
-    print()
-    pprint(api.search_read("Bengal"))
