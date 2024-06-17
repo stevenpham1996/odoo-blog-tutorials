@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "cattery-fostering",
+    'name': "cattery-caregiver",
 
     'description': """
-        Manage the fostering process of the cattery's kittens
+        Manage the caregiver process of the cattery's kittens
     """,
 
     'author': "Phamorphosis",
@@ -20,7 +20,7 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
     ],
@@ -28,5 +28,7 @@
     'demo': [
         'demo/demo.xml',
     ],
+    
+    'license': 'LGPL-3',
 }
 
