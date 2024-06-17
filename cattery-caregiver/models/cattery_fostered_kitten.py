@@ -6,3 +6,4 @@ class FosteredKitten(models.Model):
 
     kitten_id = fields.Many2one("cattery.kitten", required=True)
     fostered_parent = fields.Many2one("cattery.caregiver", required=True)
+    
