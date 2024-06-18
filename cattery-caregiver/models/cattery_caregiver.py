@@ -12,6 +12,19 @@ class Caregiver(models.Model):
         "res.partner": "contact_address"
     }
     
+    ############# Default Methods #############
+    @api.model
+    def _default_stage_id(self):
+        stage = self.env["cattery.foster_stage"].search(
+            [("state", "=", "intake")], limit=1
+            )
+        return stage
+    
+    @api.model
+    def _group_expand_stage_id(self, stages, domain, order):
+        return stages.search([domain], order=order)
+    
+    ############ Fields #############
     name = fields.Many2one("res.partner", required=True, ondelete="cascade")
     email = fields.Many2one("res.partner", required=True, ondelete="cascade")
     contact_address = fields.Many2one("res.partner", required=True, ondelete="cascade")
@@ -20,9 +33,9 @@ class Caregiver(models.Model):
         "cattery.fostered_kitten", "name", string="Fostered Kittens", index=True, required=True
     )
     
-
-    @api.depends('value')
-    def _value_pc(self):
-        for record in self:
-            record.value2 = float(record.value) / 100
-
+    stage_id = fields.Many2one(
+        "cattery.foster_stage", string = "Stage", 
+        default = _default_stage_id,
+        group_expand = "_group_expand_stage_id",
+    )
+    state = fields.Selection(related="stage_id.state")

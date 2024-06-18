@@ -12,9 +12,8 @@ class FosterStage(models.Model):
     state = fields.Selection(
         [('intake', 'Intake'),
          ('care', 'Care'),
-         ('Preparation', 'Preparation'),
+         ('preparation', 'Preparation'),
          ('adoption', 'Adoption'),
-         ('return', 'Return'),
-        ]
-        
+         ('return', 'Return'),]
+        default='intake',
     )
