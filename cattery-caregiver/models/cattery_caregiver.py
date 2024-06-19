@@ -28,7 +28,8 @@ class Caregiver(models.Model):
     name = fields.Many2one("res.partner", required=True, ondelete="cascade")
     email = fields.Many2one("res.partner", required=True, ondelete="cascade")
     contact_address = fields.Many2one("res.partner", required=True, ondelete="cascade")
-    registered_date = fields.Date(default=fields.Date.today)
+    register_date = fields.Date(default=fields.Date.today, string="Register Date")
+    
     kitten_ids = fields.One2many(
         "cattery.fostered_kitten", "name", string="Fostered Kittens", index=True, required=True
     )

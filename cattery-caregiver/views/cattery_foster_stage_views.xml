@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="cattery_foster_stage_list">
+            <field name="name">cattery.foster.stage.list</field>
+            <field name="model">cattery.foster.stage</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="cattery_foster_stage_form">
+            <field name="name">cattery.foster.stage.form</field>
+            <field name="model">cattery.foster.stage</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_cattery_foster_stage" model="ir.ui.menu">
+            <field name="name">Cattery Foster Stages Action</field>
+            <field name="res_model">cattery.foster_stage</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+    </data>
+</odoo>
