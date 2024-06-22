@@ -16,15 +16,15 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'cattery'],
+    'depends': ['base', 'cattery', 'mail'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/cattery_menu.xml',
         'views/cattery_caregiver_views.xml',
         'views/cattery_foster_stage_views.xml',
         'data/cattery_foster_stage.xml',
+        'views/cattery_caregiver_menu.xml',
     ],
     
     'license': 'LGPL-3',

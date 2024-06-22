@@ -5,38 +5,25 @@ from odoo import models, fields, api
 class Caregiver(models.Model):
     _name = 'cattery.caregiver'
     _description = 'Foster Parents'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
     _inherits = {
-        "res.partner": "name", 
-        "res.partner": "email",
-        "res.partner": "contact_address"
+        "res.partner": "partner_id",
     }
-    
-    ############# Default Methods #############
-    @api.model
-    def _default_stage_id(self):
-        stage = self.env["cattery.foster_stage"].search(
-            [("state", "=", "intake")], limit=1
-            )
-        return stage
-    
-    @api.model
-    def _group_expand_stage_id(self, stages, domain, order):
-        return stages.search([domain], order=order)
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     
     ############ Fields #############
-    name = fields.Many2one("res.partner", required=True, ondelete="cascade")
-    email = fields.Many2one("res.partner", required=True, ondelete="cascade")
-    contact_address = fields.Many2one("res.partner", required=True, ondelete="cascade")
+    partner_id = fields.Many2one("res.partner", string="Caregiver", required=True, ondelete="cascade")
     register_date = fields.Date(default=fields.Date.today, string="Register Date")
+    active = fields.Boolean(string="Is Fostering?")
     
     kitten_ids = fields.One2many(
-        "cattery.fostered_kitten", "name", string="Fostered Kittens", index=True, required=True
+        "cattery.fostered_kitten", "caregiver_id", string="Fostered Kittens", index=True, required=True
     )
+    ############ Computed Fields #############
+    num_kittens = fields.Integer(compute="_compute_num_kittens")
     
-    stage_id = fields.Many2one(
-        "cattery.foster_stage", string = "Stage", 
-        default = _default_stage_id,
-        group_expand = "_group_expand_stage_id",
-    )
-    state = fields.Selection(related="stage_id.state")
+    ############ Methods #############
+    @api.depends("kitten_ids")
+    def _compute_num_kittens(self):
+        for record in self:
+            record.num_kittens = len(record.kitten_ids)
+ 

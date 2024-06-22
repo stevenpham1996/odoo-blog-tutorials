@@ -6,14 +6,14 @@ class FosterStage(models.Model):
     _order = "sequence"
 
     name = fields.Char()
-    sequence = fields.Integer(default=10)
+    sequence = fields.Integer(default=0)
     fold = fields.Boolean()
     active = fields.Boolean()
     state = fields.Selection(
-        [('intake', 'Intake'),
-         ('care', 'Care'),
-         ('preparation', 'Preparation'),
-         ('adoption', 'Adoption'),
-         ('return', 'Return'),]
+        selection=[('intake', 'Intake'),
+                   ('care', 'Care'),
+                   ('preparation', 'Preparation'),
+                   ('adoption', 'Adoption'),
+                   ('return', 'Return')],
         default='intake',
     )

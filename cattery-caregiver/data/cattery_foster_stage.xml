@@ -1,35 +1,33 @@
 <odoo>
-  <data>
     
-          <record id="stage_intake" model="cattery.foster_stage">
-            <field name="name">Foster Home Arrival</field>
-            <field name="sequence">0</field>
-            <field name="state">intake</field>
-          </record>
+  <record id="stage_intake" model="cattery.foster_stage">
+    <field name="name">Foster Home Arrival</field>
+    <field name="sequence">0</field>
+    <field name="state">intake</field>
+  </record>
 
-          <record id="stage_care" model="cattery.foster_stage">
-            <field name="name">Accimated Care</field>
-            <field name="sequence">10</field>
-            <field name="state">care</field>
-          </record>
+  <record id="stage_care" model="cattery.foster_stage">
+    <field name="name">Accimated Care</field>
+    <field name="sequence">10</field>
+    <field name="state">care</field>
+  </record>
 
-          <record id="stage_preparation" model="cattery.foster_stage">
-            <field name="name">Adopter Founded</field>
-            <field name="sequence">20</field>
-            <field name="state">preparation</field>
-          </record>
+  <record id="stage_preparation" model="cattery.foster_stage">
+    <field name="name">Adopter Founded</field>
+    <field name="sequence">20</field>
+    <field name="state">preparation</field>
+  </record>
 
-          <record id="stage_adoption" model="cattery.foster_stage">
-            <field name="name">Forever Home Move-in</field>
-            <field name="sequence">30</field>
-            <field name="state">adoption</field>
-          </record>
+  <record id="stage_adoption" model="cattery.foster_stage">
+    <field name="name">Forever Home Move-in</field>
+    <field name="sequence">30</field>
+    <field name="state">adoption</field>
+  </record>
 
-          <record id="stage_return" model="cattery.foster_stage">
-            <field name="name">Shelter Return</field>
-            <field name="sequence">40</field>
-            <field name="state">return</field>
-          </record>
+  <record id="stage_return" model="cattery.foster_stage">
+    <field name="name">Shelter Return</field>
+    <field name="sequence">40</field>
+    <field name="state">return</field>
+  </record>
 
-  </data>
 </odoo>

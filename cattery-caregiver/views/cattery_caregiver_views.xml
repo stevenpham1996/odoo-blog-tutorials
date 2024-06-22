@@ -1,59 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <odoo>
-  <data>    
-    <record model="ir.ui.view" id="cattery_caregiver_list">
-      <field name="name">cattery.caregiver.list</field>
-      <field name="model">cattery.caregiver</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="email"/>
-          <field name="kitten_ids"/>
-        </tree>
-      </field>
-    </record>
 
-    <record model="ir.ui.view" id="cattery_caregiver_form">
-      <field name="name">cattery.caregiver.form</field>
-      <field name="model">cattery.caregiver</field>
-      <field name="arch" type="xml">
-        <form>
-          <sheet>
-            <group>
-              <field name="name"/>
-              <field name="email"/>
-              <field name="contact_address"/>
-              <field name="register_date"/>
-            </group>
-            <group>
-              <field name="kitten_ids"/>
-              <field name="stage_ids"/>
-              <field name="state"/>
-            </group>
-            <notebook>
-              <page name="lines">
-                <field name="kitten_ids"/>
-                  <tree editable="bottom">
-                    <field name="kitten_id"/>
-                  </tree>
-              </page>
-          </sheet>
-        </form>
-      </field>
-    </record>
+  <record model="ir.ui.view" id="cattery_caregiver_list">
+    <field name="name">cattery.caregiver.list</field>
+    <field name="model">cattery.caregiver</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="partner_id"/>
+        <field name="register_date"/>
+      </tree>
+    </field>
+  </record>
 
+  <record model="ir.ui.view" id="cattery_caregiver_form">
+    <field name="name">cattery.caregiver.form</field>
+    <field name="model">cattery.caregiver</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="partner_id"/>
+            <field name="register_date"/>
+            <field name="active"/>
+          </group>
+          <notebook>
+            <page name="Fostered Kittens">
+              <field name="kitten_ids">
+                <tree editable="bottom">
+                  <field name="kitten_id"/>
+                  <field name="stage_id"/>
+                </tree>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
 
-    <record id="action_cattery_caregiver" model="ir.ui.menu">
-      <field name="name">Cattery Caregiver Action</field>
-      <field name="res_model">catter.caregiver</field>
-      <field name="view_mode">tree,kanban,form</field>
-      <field name="context">{'search_default_available': 1}</field>
-      <field name="help" type="html">
-        <p class="o_view_nocontent_smiling_face">
-            Register a foster parent
-        </p>
-      </field>
-    </record>
-
-
-  </data>
+  <record id="action_cattery_caregiver" model="ir.actions.act_window">
+    <field name="name">Caregivers</field>
+    <field name="res_model">cattery.caregiver</field>
+    <field name="view_mode">tree,kanban,form</field>
+    <field name="domain">[('active', '=', True)]</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+          Register a foster parent
+      </p>
+    </field>
+  </record>
+  
 </odoo>

@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_cattery_caregiver,cattery.caregiver,model_cattery_caregiver,cattery.cattery_group_user,1,1,1,1
-access_cattery_fostered_kitten,cattery.fostered_kitten,model_cattery_fostered_kitten,cattery.cattery_group_user,1,1,1,1
-access_cattery_foster_stage,cattery.foster_stage,model_cattery_foster_stage,cattery.cattery_group_user,1,1,1,1
+access_cattery_caregiver,cattery.caregiver,model_cattery_caregiver,base.group_user,1,1,1,1
+access_cattery_fostered_kitten,cattery.fostered_kitten,model_cattery_fostered_kitten,base.group_user,1,1,1,1
+access_cattery_foster_stage,cattery.foster_stage,model_cattery_foster_stage,base.group_user,1,1,1,1
