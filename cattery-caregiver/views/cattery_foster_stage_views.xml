@@ -26,7 +26,7 @@
     </record>
 
     <record id="action_cattery_foster_stage" model="ir.actions.act_window">
-        <field name="name">Kittens by Foster Stages</field>
+        <field name="name">Foster Stages</field>
         <field name="res_model">cattery.foster_stage</field>
         <field name="view_mode">tree,kanban,form</field>
     </record>
