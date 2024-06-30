@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--tree -->
+    <record model="ir.ui.view" id="inherited_cattery_kitten_view_tree">
+        <field name="name">cattery.kitten.tree</field>
+        <field name="model">cattery.kitten</field>
+        <field name="inherit_id" ref="cattery.cattery_kitten_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="state"/>
+            </xpath>
+        </field>
+    </record>
+
+<!-- Form -->
+    <record model="ir.ui.view" id="inherited_cattery_kitten_view_form">
+        <field name="name">cattery.kitten.form</field>
+        <field name="model">cattery.kitten</field>
+        <field name="inherit_id" ref="cattery.cattery_kitten_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_foster" string="I'm a foster kitty!" type="object" invisible="state != 'available'"/>
+                <field name="state" widget="statusbar"/>
+            </xpath>
+            <xpath expr="//sheet/group[last()]" position="inside">
+                <group>
+                    <field name="caregiver_id"/>
+                </group>
+                <!-- <field name="stage_id"/> -->
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,20 @@
+<odoo>
+
+    <menuitem id="cattery_third_level_menu" 
+    name="Foster" 
+    parent="cattery.cattery_menu_root"
+    sequence="15"/>
+
+    <menuitem id="cattery_foster_parent_menu"
+    name="Foster Parents"
+    action="action_cattery_foster_parent" 
+    parent="cattery_third_level_menu" 
+    sequence="5"/>
+
+    <!-- <menuitem id="action_cattery_foster_stage_menu" 
+    name="Foster Stages" 
+    action="action_cattery_foster_stage" 
+    parent="cattery_third_level_menu" 
+    sequence="10"/> -->
+
+</odoo>
