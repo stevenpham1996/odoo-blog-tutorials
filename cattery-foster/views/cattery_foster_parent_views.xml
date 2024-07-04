@@ -27,12 +27,10 @@
           </group>
           <notebook>
             <page name="Fostered Kittens">
-              <field name="kitten_ids">
+              <field name="foster_kitten_ids" style="align: center">
                 <tree editable="bottom">
-                  <field name="image" widget="image" class="oe_avatar"/> 
-                  <field name="name"/>
-                  <field name="gender"/>
-                  <field name="birth_date"/>
+                  <field name="kitten_id"/>
+                  <field name="image" widget="image" class="oe_avatar"/>
                   <!-- <field name="stage_id"/> -->
                 </tree>
               </field>

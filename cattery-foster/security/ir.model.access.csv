@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_cattery_foster_parent,cattery.foster.parent,model_cattery_foster_parent,base.group_user,1,1,1,1
+access_cattery_foster_kitten,cattery.foster.kitten,model_cattery_foster_kitten,base.group_user,1,1,1,1
