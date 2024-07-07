@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="cattery_foster_message_form" model="ir.ui.view">
+        <field name="name">cattery.foster.message.form</field>
+        <field name="model">cattery.foster.message</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="message_head"/>
+                    <field name="message_body"/>
+                    <field name="caregiver_ids"/>
+                </group>
+                <footer>
+                    <button type="object" name="send_message" string="Send"/>
+                    <button special="cancel" string="Cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="cattery_foster_message_action" model="ir.actions.act_window">
+        <field name="name">cattery.foster.message.action</field>
+        <field name="res_model">cattery.foster.message</field>
+        <field name="view_mode">form</field>
+        <field name="binding_model_id" ref="model_cattery_foster_parent"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

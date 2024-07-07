@@ -21,6 +21,7 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'wizard/cattery_foster_message_view.xml',
         'views/cattery_foster_parent_views.xml',
         'views/cattery_kitten_views.xml',
         # 'views/cattery_foster_stage_views.xml',
