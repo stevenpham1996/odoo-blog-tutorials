@@ -29,6 +29,7 @@ class Kitten(models.Model):
             else:
                 record.age = record.age if record.age else 8
 
+
     ############ Action Methods #############
     def action_foster(self):
         if self.state == "adopted":
@@ -37,15 +38,9 @@ class Kitten(models.Model):
             raise UserError("Kitten not yet ready, please wait a while.")
         return self.write({"state": "fostered"})
     
-    ############ Constraints ###############
-    @api.constrains("state", "caregiver_id")
-    def _check_adopter_id(self):
-        for record in self:
-            if record.state != "fostered" and record.caregiver_id:
-                raise ValidationError("Only fostered kittens can have a caregiver.")
-            
-    @api.model
-    def create(self, vals):
-        if vals['caregiver_id']:
-            vals['state'] = 'fostered'
-        return super().create(vals)
+    ############ Onchange Methods #############
+    @api.onchange("caregiver_id")
+    def _onchange_caregiver_id(self):
+        if self.caregiver_id:
+            self.state = "fostered"
+    

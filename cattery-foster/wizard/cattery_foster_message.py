@@ -12,7 +12,8 @@ class FosterMessage(models.TransientModel):
     @api.model
     def default_get(self, fields):
         res = super().default_get(fields)
-        res["caregiver_ids"] = self._context.get("active_ids")
+        caregiver_ids = self.env.context["active_ids"]
+        res["caregiver_ids"] = [(6, 0, caregiver_ids)]
         return res
     
     def send_message(self):

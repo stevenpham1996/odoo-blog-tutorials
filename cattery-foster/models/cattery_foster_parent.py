@@ -32,14 +32,10 @@ class FosterParent(models.Model):
     @api.constrains("foster_kitten_ids", "active")
     def _check_foster_parent(self):
         for record in self:
-            for kitten in record.foster_kitten_ids:
-                if kitten.state != "fostered" \
-                or kitten.caregiver_id.partner_id != record.partner_id:
-                    raise ValidationError("Please choose the correct foster kitten.")
             if record.active and len(record.foster_kitten_ids) < 1:
                     raise ValidationError("Active parent must foster at least 1 kitten.")
             elif not record.active and len(record.foster_kitten_ids) > 1:
                     raise ValidationError("Inactive parent can not foster any kitten.")
                 
-
+                
             

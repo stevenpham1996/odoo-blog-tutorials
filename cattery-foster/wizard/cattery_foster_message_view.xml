@@ -20,7 +20,7 @@
     </record>
 
     <record id="cattery_foster_message_action" model="ir.actions.act_window">
-        <field name="name">cattery.foster.message.action</field>
+        <field name="name">Message</field>
         <field name="res_model">cattery.foster.message</field>
         <field name="view_mode">form</field>
         <field name="binding_model_id" ref="model_cattery_foster_parent"/>

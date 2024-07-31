@@ -19,9 +19,12 @@ class FosterKitten(models.Model):
 
     caregiver_id = fields.Many2one("cattery.foster.parent", required=True)
     kitten_id = fields.Many2one("cattery.kitten", required=True)
-    image = fields.Binary(related="kitten_id.image")
+    image = fields.Binary(related="kitten_id.image", string="Image")
+    
     # stage_id = fields.Many2one(
     #     "cattery.foster.stage", string = "Foster Stage", 
     #     default = _default_stage_id,
     #     group_expand = "_group_expand_stage_id",
     # )
+    
+    

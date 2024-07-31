@@ -27,7 +27,7 @@
           </group>
           <notebook>
             <page name="Fostered Kittens">
-              <field name="foster_kitten_ids" style="align: center">
+              <field name="foster_kitten_ids" widget="section_and_note_one2many">
                 <tree editable="bottom">
                   <field name="kitten_id"/>
                   <field name="image" widget="image" class="oe_avatar"/>
