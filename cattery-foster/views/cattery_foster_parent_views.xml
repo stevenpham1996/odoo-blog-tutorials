@@ -9,6 +9,8 @@
       <tree>
         <field name="partner_id"/>
         <field name="register_date"/>
+        <!-- <field name="active"/> -->
+        <field t-if="active" name="num_kittens"/>      
       </tree>
     </field>
   </record>
@@ -50,7 +52,7 @@
     <field name="name">Foster Parents</field>
     <field name="res_model">cattery.foster.parent</field>
     <field name="view_mode">tree,kanban,form</field>
-    <field name="domain">[('active', '=', True)]</field>
+    <field name="domain">[(1, '=', 1)]</field> <!-- Display all records, ignoring 'active' field -->
     <field name="help" type="html">
       <p class="o_view_nocontent_smiling_face">
           Register a foster parent

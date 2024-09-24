@@ -1,5 +1,5 @@
 from odoo import api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError
 
 class FosterMessage(models.TransientModel):
     _name = "cattery.foster.message"
@@ -14,18 +14,19 @@ class FosterMessage(models.TransientModel):
         res = super().default_get(fields)
         caregiver_ids = self.env.context["active_ids"]
         res["caregiver_ids"] = [(6, 0, caregiver_ids)]
+        # res["caregiver_ids"] = caregiver_ids
         return res
     
     def send_message(self):
         self.ensure_one()
         if not self.caregiver_ids:
-            raise ValidationError("Please select at least one foster parent.")
+            raise UserError("Please select at least one foster parent.")
         if not self.message_body:
-            raise ValidationError("Can not send a blank message.")
+            raise UserError("Can not send a blank message.")
         for caregiver in self.caregiver_ids:
             caregiver.message_post(
                 body=self.message_body,
                 subject=self.message_head,
-                subtype="mail.mt_comment",
+                # subtype="html",
             )
         return True
